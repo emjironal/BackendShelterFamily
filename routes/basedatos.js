@@ -2,8 +2,8 @@ var bluebird = require('bluebird');
 var pgp = require('pg-promise')({
     promiseLib: bluebird
 });
-const connectionUrl = 'postgres://rcygnhpuisrxld:9b08ad521466ea78f8697fe956e534d9a300d52f0d164f67f4eb0fe80833698f@ec2-54-225-95-183.compute-1.amazonaws.com:5432/d1rqbmoplu7o3p?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory';
-//const connectionUrl = 'postgres://postgres:postgres@localhost:5432/appetyte';//local
+const connectionUrl = 'postgres://udvsnbcohpgnls:930772924d8f64ff43d729bf0b4fb4481e583e5a50fa576f0583ea8837c7b85b@ec2-107-20-177-161.compute-1.amazonaws.com:5432/dcup1mbk58r3al?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory';
+//const connectionUrl = 'postgres://postgres:postgres@localhost:5432/shelterfamily';//local
 var db = pgp(connectionUrl);
 
 /**
@@ -15,7 +15,7 @@ var db = pgp(connectionUrl);
  */
 function select(res, table, whereObject, orderByObject)
 {
-    var query = "select * from " + table;
+    var query = "select * from " + table.nombre;
     if(whereObject != undefined)
     {
         if(Array.isArray(whereObject))
