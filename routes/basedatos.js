@@ -7,6 +7,64 @@ const connectionUrl = 'postgres://udvsnbcohpgnls:930772924d8f64ff43d729bf0b4fb44
 var db = pgp(connectionUrl);
 
 /**
+ * Hace un update en la base de datos
+ * @param res respuesta
+ * @param table JSONObject: {"nombre": <string>}
+ * @param updates JSONArray: [{"columna": <string>, "nuevoValor": <string>}]
+ * @param whereObject JSONArray: [{"columna": <string>, "valor": <any>}]
+ */
+function update(res, table, updates, whereObject)
+{
+    if(updates != undefined)
+    {
+        var query = "update " + table.nombre + " set ";
+        if(Array.isArray(updates))
+        {
+            updates.forEach(function(value, index)
+            {
+                query += ""+ value.columna +" = '"+ value.nuevoValor +"'";
+                if(index < updates.length - 1)
+                {
+                    query += ", ";
+                }
+            });
+        }
+        if(whereObject != undefined)
+        {
+            if(Array.isArray(whereObject))
+            {
+                query += " where "
+                whereObject.forEach(function(value, index)
+                {
+                    query += ""+ value.columna +" = '"+ value.valor +"'";
+                    if(index < whereObject.length - 1)
+                    {
+                        query += ", ";
+                    }
+                });
+            }
+        }
+        db.query(query)
+        .then(()=>
+        {
+            var result = {"result": true}
+            res.send(result);
+        })
+        .catch(err=>
+        {
+            var result = {"result": false}
+            res.send(result);
+            console.log(err);
+        });
+    }
+    else
+    {
+        var result = {"result": false}
+        res.send(result);
+    }
+}
+
+/**
  * Hace un select en la base de datos
  * @param res respuesta
  * @param table JSONObject: {"nombre": <string>}
@@ -60,3 +118,4 @@ function select(res, table, whereObject, orderByObject)
 }
 
 module.exports.select = select;
+module.exports.update = update;
