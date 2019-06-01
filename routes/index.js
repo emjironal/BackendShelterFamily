@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = pgp(connectionUrl);
+var db = require('./basedatos').db;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
