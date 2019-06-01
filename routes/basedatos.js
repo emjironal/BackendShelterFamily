@@ -186,4 +186,4 @@ function select(res, table, whereObject, orderByObject)
 module.exports.select = select;
 module.exports.update = update;
 module.exports.insert = insert;
-module.exports.query = query;
+module.exports.db = db;

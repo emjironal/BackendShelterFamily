@@ -11,7 +11,7 @@ router.post('/login', function(req, res, next)
 {
   var username = req.body.txtUsuario;
   var password = req.body.txtPassword;
-  var query = "select * from usuario where username = '" + username + "' and password = '" + password +"'";
+  var query = "select * from usuario where usuario = '" + username + "' and clave = '" + password +"'";
   db.query(query)
   .then(result =>
     {
