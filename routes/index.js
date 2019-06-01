@@ -23,7 +23,7 @@ router.post('/login', function(req, res, next)
       else
       {
         console.log('Result:', result[0]);
-        res.redirect('/administrador');
+        res.redirect('/carga');
       }
     }
   )

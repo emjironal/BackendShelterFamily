@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./basedatos').db;
+var select = require('./basedatos').select;
 
 /* GET home page. */
 router.get('/', function(req, res, next)
 {
-  db.query("select * from Restaurant r " +
+  select("select * from Restaurant r " +
     "inner join Score s on (r.idrestaurant = s.idrestaurant) " +
     "order by r.idrestaurant")
     .then(restaurantes=>{
