@@ -6,4 +6,32 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/login', function(req, res, next)
+{
+  var username = req.body.txtUsuario;
+  var password = req.body.txtPassword;
+  var query = "select * from usuario where username = '" + username + "' and password = '" + password +"'";
+  db.query(query)
+  .then(result =>
+    {
+      if(result.length < 1)
+      {
+        console.log('Result:', 'vacio', ' ', query);
+        res.redirect('/');
+      }
+      else
+      {
+        console.log('Result:', result[0]);
+        res.redirect('/administrador');
+      }
+    }
+  )
+  .catch(err =>
+    {
+      console.log('Error: ', err);
+      res.redirect('/');
+    }
+  );
+});
+
 module.exports = router;

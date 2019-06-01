@@ -7,12 +7,78 @@ const connectionUrl = 'postgres://udvsnbcohpgnls:930772924d8f64ff43d729bf0b4fb44
 var db = pgp(connectionUrl);
 
 /**
+ * Hace un insert en la base de datos
+ * @param res respuesta
+ * @param table JSONObject: {"nombre": <string>}
+ * @param inserts JSONArray: [{"columna": <string>, "valor": <string>, "tipo": <string>}]
+ */
+
+
+function insert(res, table, inserts)
+{
+    if(inserts != undefined)
+    {
+        var query = "insert into " + table.nombre + "(" ;
+        if(Array.isArray(inserts))
+        {
+            inserts.forEach(function(value, index)
+            {
+                query += ""+ value.columna;
+                if(index < inserts.length - 1)
+                {
+                    query += ", ";
+                }
+            });
+        }
+        query += ") values ("
+        if(Array.isArray(inserts))
+        {
+            inserts.forEach(function(value, index)
+            {
+                if (value.columna == "string" || value.columna == "dateTime"){
+                    query += "'"+ value.valor +"'";
+                } else {
+                    query += value.valor;
+                }
+                if(index < inserts.length - 1)
+                {
+                    query += ", ";
+                }
+            });
+        }
+        query += ")"
+        db.query(query)
+        .then(()=>
+        {
+            var result = {"result": true}
+            res.send(result);
+        })
+        .catch(err=>
+        {
+            var result = {"result": false}
+            res.send(result);
+            console.log(err);
+        });
+    }
+    else
+    {
+        var result = {"result": false}
+        res.send(result);
+    }
+}
+
+
+
+/**
  * Hace un update en la base de datos
  * @param res respuesta
  * @param table JSONObject: {"nombre": <string>}
  * @param updates JSONArray: [{"columna": <string>, "nuevoValor": <string>}]
  * @param whereObject JSONArray: [{"columna": <string>, "valor": <any>}]
  */
+
+
+ 
 function update(res, table, updates, whereObject)
 {
     if(updates != undefined)
