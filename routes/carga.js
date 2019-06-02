@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
 router.post('/load', function(req, res, next)
 {
   var route = req.body.jsonFile
+  console.log(route)
   var data = require(route)
   try {
       var json = JSON.parse(data)

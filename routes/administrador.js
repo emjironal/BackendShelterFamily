@@ -6,23 +6,14 @@ var select = require('./basedatos').select;
 /* GET home page. */
 router.get('/', function(req, res, next)
 {
-  select("select * from Restaurant r " +
-    "inner join Score s on (r.idrestaurant = s.idrestaurant) " +
-    "order by r.idrestaurant")
-    .then(restaurantes=>{
-        db.query("select * from Usertable where type ='normal'")
-            .then(usuarios=>{
-                res.render('administrador', {restaurants: restaurantes, users: usuarios});
-            })
-            .catch(err=>{
-                console.log("Error: ", err);
-                res.render('administrador', {restaurants: restaurantes});
-            });
-    })
-    .catch(err=>{
-        console.log("Error: ", err);
-        res.render('administrador', {restaurants: [], users: []});
-    });
+    db.query("Select r.idRefugio as id, f.nombre as nom, count(r.idRefugio) as total From Reserva r inner join Refugio f on (r.idRefugio = f.idrefugio) Group by 1,2 Order by 3 desc;")
+        .then(refugios=>{
+            res.render('administrador', {refugios: refugios});
+        })
+        .catch(err=>{
+            console.log("Error: ", err);
+            res.render('administrador', {refugios: []});
+        });
 });
 
 router.post("/modificar/:index/:id", function(req, res, next)
