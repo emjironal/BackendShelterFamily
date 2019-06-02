@@ -1,19 +1,63 @@
 extends layout
 
 block content
-    h1 Administrador
+    h1 Estadísticas
     
-    h2 Vista usuarios
+    h2 Clinetes que más adoptan
     div(style="overflow-y: scroll; height:200px;")
         table(style="width:50%")
             thead
             tr
-                th IdRefugio
+                th Cedula
                 th Nombre
                 th Cantidad de reservas
             tbody
-            each refugio in refugios
+            each persona in personas
                 tr
-                    td #{refugio.id}
-                    td #{refugio.nom}
-                    td #{refugio.total}
+                    td #{persona.cedula}
+                    td #{persona.nombre}
+                    td #{persona.count}
+    h2 Refugios con más animales
+    div(style="overflow-y: scroll; height:200px;")
+        table(style="width:50%")
+            thead
+            tr
+                th Identificador Refugio
+                th Nombre
+                th Cantidad de reservas
+            tbody
+            each user in users
+                tr
+                    td #{user.id}
+                    td #{user.nombre}
+                    td #{user.total}
+    h2 Refugios más frecuentados
+    div(style="overflow-y: scroll; height:200px;")
+        table(style="width:50%")
+            thead
+            tr
+                th Identificador Refugio
+                th Nombre
+                th Cantidad de animales
+            tbody
+            each refug in ref
+                tr
+                    td #{refug.id}
+                    td #{refug.nombre}
+                    td #{refug.count}
+    h2 Lugares con más refugios
+    div(style="overflow-y: scroll; height:200px;")
+        table(style="width:50%")
+            thead
+            tr
+                th Codigo
+                th Distrito
+                th Provincia
+                th Cantidad de refugios
+            tbody
+            each ubic in ubi
+                tr
+                    td #{ubic.codigo}
+                    td #{ubic.distrito}
+                    td #{ubic.provincia}
+                    td #{ubic.total}
