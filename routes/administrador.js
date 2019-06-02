@@ -12,7 +12,7 @@ router.get('/', function(req, res, next)
             .then(usuarios=>{
                 db.query("Select r.idRefugio as ID, f.nombre as Nombre, count(r.idRefugio) From Reserva r inner join Refugio f on (r.idRefugio = f.idrefugio) Group by 1,2 Order by 3 desc;")
                 .then(ref=>{
-                    db.query("Select distinct u.codigodistrito as codigo, d.nombre AS DISTRITO, p.nombre AS PROVINCIA, count(r.idrefugio) AS total From usuario u inner join refugio r on (u.idusuario = r.idrefugio) inner join distrito d on (d.codigo = u.codigodistrito) inner join provincia p on (d.idprovincia = p.idprovincia) Group by 1,2,3 Order by 2 desc;")
+                    db.query("Select distinct u.codigodistrito as codigo, d.nombre AS DISTRITO, p.nombre AS PROVINCIA, count(r.idrefugio) AS total From usuario u inner join refugio r on (u.idusuario = r.idrefugio) inner join distrito d on (d.codigo = u.codigodistrito) inner join provincia p on (d.idprovincia = p.idprovincia) Group by 1,2,3 Order by 4 desc;")
                     .then(ubi=>{
                         res.render('administrador', { personas: personas, users:usuarios , ref: ref, ubi: ubi});
                     })
