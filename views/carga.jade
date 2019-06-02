@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1 Carga masiva de refugios
-  form(action="/load", method="post")
+  form(action="/carga", method="post")
     p Seleccionar archivo: 
         input(id="jsonFile" type="file" accept=".json")
         
-    input(type="submit", value="Upload", id="btnLoad")
+    input(type="submit", value="Upload", id="btnLoad", formaction="/carga/load")
