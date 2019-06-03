@@ -4,9 +4,9 @@ body {
 }
 
 a {
-  background-color: #4CAF50; /* Green */
+  background-color: #C1E9FF; /* Green */
   border: none;
-  color: white;
+  color: #FF9100;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -27,7 +27,7 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #C1E9FF;
+  color: #FF9100;
 }
 
